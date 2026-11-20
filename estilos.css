@@ -1,0 +1,31 @@
+/* ---------- Base (Parte 1) ---------- */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    color: #222;
+    background: #FAFAFA;
+}
+h1 { color: #21295C; }
+a { color: #1B5E9E; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 1rem; background: #fff; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #ddd; text-align: left; }
+th { background: #21295C; color: #fff; }
+tr:hover td { background: #F3F6FB; }
+.completada { text-decoration: line-through; color: #888; }
+
+form { display: flex; flex-direction: column; gap: 0.8rem; max-width: 420px; }
+label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+input, select { padding: 6px 8px; border: 1px solid #bbb; border-radius: 4px; font: inherit; font-weight: normal; }
+button { padding: 8px 14px; background: #21295C; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+button:hover { background: #33408A; }
+.error { color: #C62828; font-weight: bold; }
+
+/* ---------- Sesión y validación por campo (Parte 2) ---------- */
+.cabecera { border-bottom: 1px solid #ccc; margin-bottom: 1rem; padding-bottom: 0.5rem; }
+.saludo { color: #21295C; font-weight: bold; }
+.alert-error { background: #FFEBEE; border: 1px solid #C62828; padding: 8px 12px; }
+.input-error { border-color: #C62828; background: #FFF5F5; }
+.campo-error { color: #C62828; font-size: 0.85rem; display: block; }

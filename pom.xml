@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ejemplo</groupId>
+  <artifactId>gestor-tareas-mvc</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- Jakarta Servlet API (provided: Tomcat la provee) -->
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- JSTL -->
+    <dependency>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+  </dependencies>
+
+  <!--
+    Estructura PLANA: todos los archivos del proyecto viven en la raiz del
+    repositorio (sin src/main/...). La configuracion de build indica a Maven
+    donde esta cada tipo de archivo y en que ruta debe quedar dentro del WAR:
+      *.java        -> compilados a WEB-INF/classes (respetan su "package")
+      *.properties  -> WEB-INF/classes (ResourceBundle "messages")
+      web.xml       -> WEB-INF/web.xml
+      index.jsp     -> raiz del WAR
+      lista.jsp, formulario.jsp, login.jsp -> WEB-INF/views/ (no accesibles por URL)
+      estilos.css   -> css/estilos.css
+  -->
+  <build>
+    <finalName>gestor-tareas-mvc</finalName>
+    <sourceDirectory>${basedir}</sourceDirectory>
+
+    <resources>
+      <resource>
+        <directory>${basedir}</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <includes>
+            <include>*.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.4.0</version>
+        <configuration>
+          <warSourceDirectory>${basedir}</warSourceDirectory>
+          <warSourceIncludes>index.jsp</warSourceIncludes>
+          <webXml>${basedir}/web.xml</webXml>
+          <webResources>
+            <resource>
+              <directory>${basedir}</directory>
+              <targetPath>WEB-INF/views</targetPath>
+              <includes>
+                <include>lista.jsp</include>
+                <include>formulario.jsp</include>
+                <include>login.jsp</include>
+              </includes>
+            </resource>
+            <resource>
+              <directory>${basedir}</directory>
+              <targetPath>css</targetPath>
+              <includes>
+                <include>estilos.css</include>
+              </includes>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
